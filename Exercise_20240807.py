@@ -7,9 +7,21 @@
 import folium
 
 with open("EarthquakeData_20250219212746.csv", 'r',encoding='utf-8') as file:
-    eathquakeData = file.readlines()
-    
-m = folium.Map(location=(45.52, -112.67))
+    earthquakeData = file.readlines()
+    eData = []
+    for i in range(1,3):
+        temp = earthquakeData[i].split(sep='"')
+        temp[0] = temp[0].rstrip(',')
+        temp[2] = temp[2].strip(',').rstrip()
+        temp.extend(temp[2].split(','))
+        temp.pop(2)
+        eData.append(temp)
+        
 
+for i in range(len(eData)):
+    print(eData[i])    
+# m = folium.Map(location=(45.52, -112.67))
 
- 
+# folium.CircleMarker((earthquakeData[1][2],earthquakeData[1][3]),earthquakeData[1][0],tooltip=earthquakeData[1][1]) 
+
+# m.save("index.html")
