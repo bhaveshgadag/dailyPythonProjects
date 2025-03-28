@@ -17,8 +17,10 @@ You have 10 attempts to guess the number""")
 attempt = 0
 
 while attempt < 10:
-    guess = int(input("Enter your guess: "))
     attempt += 1
+    print(f"Attempt: {attempt}")
+    guess = int(input("Enter your guess: "))
+    
 
     if guess == number:
         print(f"Congralutions! You have guessed the correct number in {attempt} attempts.")
