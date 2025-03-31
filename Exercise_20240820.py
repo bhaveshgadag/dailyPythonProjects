@@ -11,9 +11,9 @@ chars = len(text)
 text_arr = text.split()
 words = len(text_arr)
 
-# text_arr = text.split(sep='.')
-# sentences = len(text_arr)
-# print(text_arr)
+text_arr = [x for x in text.split(sep='.') if len(x) > 0]
+sentences = len(text_arr)
+print(text_arr)
 
 print("Text Analysis Result:")
 print("---------------------")
