@@ -16,6 +16,7 @@ sentences = len(text_arr)
 freq = re.sub(r'[^\w\s]','',text).lower()
 freq = freq.split()
 words = len(text_arr)
+word_len = []
 freq_dict = {}
 for word in freq:
     if word in freq_dict.keys():
@@ -23,8 +24,11 @@ for word in freq:
         freq_dict.update({word:word_freq + 1})
     else:
         freq_dict.update({word:1})
+    word_len.append(len(word))
 
 sorted_d = [[w, freq_dict[w]] for w in sorted(freq_dict, key=freq_dict.get, reverse=True)]
+avg_word_len = sum(word_len) / len(word_len)
+print(f"{avg_word_len:.2f}")
 
 print("Text Analysis Result:")
 print("---------------------")
