@@ -5,19 +5,32 @@
 
 import re
 
-text = input("Enter a block of text for analysis:")
-
-text = "Common frogs metamorphose through three distinct developmental life stages - aquatic larva, terrestrial juvenile, and adult. They have corpulent bodies with a rounded snout, webbed feet and long hind legs adapted for swimming in water and hopping on land. Common frogs are often confused with the common toad (Bufo bufo), but frogs can easily be distinguished as they have longer legs, hop, and have a moist skin, whereas toads crawl and have a dry 'warty' skin. The spawn of the two species also differs, in that frog spawn is laid in clumps and toad spawn is laid in long strings."
-chars = len(text)
-
-text_arr = [x for x in text.split(sep='.') if len(x) > 0]
-sentences = len(text_arr)
-
-freq = re.sub(r'[^\w\s]','',text).lower()
-freq = freq.split()
-words = len(text_arr)
 word_len = []
 freq_dict = {}
+avg_sentence_len = 0
+sentence_len = []
+
+def remove_punctuations(text):
+    return re.sub(r'[^\w\s]','',text)
+
+text = input("Enter a block of text for analysis:")
+
+chars = len(text)
+
+# Sentences
+sentences_arr = [x for x in text.split(sep='.') if len(x) > 0]
+sentences = len(sentences_arr)
+
+# Average sentence length in words
+for sentence in sentences_arr:
+    sentence_len.append(len(remove_punctuations(sentence).lower().split()))
+
+# Total words
+freq = remove_punctuations(text).lower()
+freq = freq.split()
+words = len(freq)
+
+# Most freq word and avg word length
 for word in freq:
     if word in freq_dict.keys():
         word_freq = freq_dict.get(word)
@@ -28,19 +41,13 @@ for word in freq:
 
 sorted_d = [[w, freq_dict[w]] for w in sorted(freq_dict, key=freq_dict.get, reverse=True)]
 avg_word_len = sum(word_len) / len(word_len)
-print(f"{avg_word_len:.2f}")
 
+# Result
 print("Text Analysis Result:")
 print("---------------------")
 print(f"Total Characters: {chars}")
 print(f"Total Words: {words}")
 print(f"Total Sentences: {sentences}")
-print(f"Most Frequent Word: {sorted_d[0][0]} (used {sorted_d[0][1]} times)")
-
-# Text Analysis Result:
-# Total Characters: 
-# Total Words:
-# Total Sentences:
-# Most Frequent Word: (used times)
-# Average word length: characters
-# Average sentence length: words
+print(f"Most Frequent Word: '{sorted_d[0][0]}' (used {sorted_d[0][1]} times)")
+print(f"Average word length: {avg_word_len:.2f} characters")
+print(f"Average sentence length: {(sum(sentence_len)/sentences):.0f} words")
