@@ -4,10 +4,14 @@
 
 import time
 
+def sectomins(secs):
+    return int(secs / 60),int(secs % 60)
+
 ctime = int(input("Enter the time in seconds: "))
 
 while ctime != 0:
-    print(f"{ctime}")
+    mins, secs = sectomins(ctime)
+    print(f"{mins:02}:{secs:02}")
     ctime = ctime - 1
     time.sleep(1)
 
