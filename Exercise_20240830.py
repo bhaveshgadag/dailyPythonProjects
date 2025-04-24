@@ -7,7 +7,7 @@
 # (5) Optionally, upload the script to a service such as PythonAnywhere.com to schedule it for execution 
 #     at a certain time every day.
 
-import psutil, csv
+import psutil, time
 
 system_metrics = []
 # CPU Usage
@@ -23,14 +23,18 @@ disk = psutil.disk_usage('/')
 system_metrics.append(disk[0]/(1024 * 1024 * 1024))
 system_metrics.append(disk[1]/(1024 * 1024 * 1024))
 
-# with open('System_Metrics.csv', 'r+', newline='' ) as csvfile:
-with open('bilingual-vocab.csv', 'r+' ) as csvfile:
+with open('System_Metrics.csv', 'r+') as csvfile:
 
     header = 'timestamp,cpu_usage,memory_total_mb,memory_used_mb,disk_total_gb,disk_used_gb'
+    # Check if header is present
     if header != csvfile.readline():
         csvfile.seek(0)
         csvfile.write(f"{header}\n")
     
-    
+    # Change stream position to end of file
     csvfile.seek(0, 2)
-    csvfile.write("book,hon\n")
+    line = time.strftime("%Y-%m-%d %H:%M:%S")
+    for metric in system_metrics:
+        line = f"{line},{metric}"
+
+    csvfile.write(f"{line}\n")
