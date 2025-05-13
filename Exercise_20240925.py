@@ -34,26 +34,25 @@ class BankSystem:
 
     def view_balance(self, name):
         print(f"Account holder: {name}, Balance: {self.accounts[name].view_balance():.1f}")
-       
 
     def run(self):
         while True:
             print("\n1. Create Account\n2. Deposit Money\n3. View Balance\n4. Exit")
             choice = input("Enter choice: ")
-            name = input("Enter your name: ")
+            if choice != '4':
+                name = input("Enter your name: ")
 
             if choice == '1':
                 self.create_account(name)
 
-            elif choice == '2':
+            elif choice == '2' and name in self.accounts.keys():
                 self.deposit_money(name)
 
-            elif choice == '3':
+            elif choice == '3' and name in self.accounts.keys():
                 self.view_balance(name)
-
+            
             elif choice == '4':
                 break
-
 
 if __name__ == "__main__":
     bank_system = BankSystem()
