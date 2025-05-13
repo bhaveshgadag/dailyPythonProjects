@@ -10,7 +10,8 @@ class Account:
         self.balance = initial_deposit
 
     def deposit(self, amount):
-        ...
+        self.balance += amount
+        return self.balance
 
     def view_balance(self):
         ...
@@ -27,7 +28,10 @@ class BankSystem:
         print(f"Account created for {name} with balance {init_dep:0.1f}")  
 
     def deposit_money(self):
-        ...
+        name = input("Enter your name: ")
+        deposit = int(input("Enter amount to deposit: "))
+        new_balance = self.accounts[name].deposit(deposit)
+        print(f"{deposit:.1f} deposited. New balance: {new_balance:.1f}")
 
 
     def view_balance(self):
