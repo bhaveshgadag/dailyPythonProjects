@@ -14,43 +14,42 @@ class Account:
         return self.balance
 
     def view_balance(self):
-        ...
+        return self.balance
 
 
 class BankSystem:
     def __init__(self):
         self.accounts = {}
 
-    def create_account(self):
-        name = input("Enter your name: ")
+    def create_account(self, name):
         init_dep = int(input("Enter initial deposit: "))
         self.accounts[name] = Account(name, init_dep)      
         print(f"Account created for {name} with balance {init_dep:0.1f}")  
 
-    def deposit_money(self):
-        name = input("Enter your name: ")
+    def deposit_money(self, name):
         deposit = int(input("Enter amount to deposit: "))
         new_balance = self.accounts[name].deposit(deposit)
         print(f"{deposit:.1f} deposited. New balance: {new_balance:.1f}")
 
 
-    def view_balance(self):
-        ...
+    def view_balance(self, name):
+        print(f"Account holder: {name}, Balance: {self.accounts[name].view_balance():.1f}")
        
 
     def run(self):
         while True:
             print("\n1. Create Account\n2. Deposit Money\n3. View Balance\n4. Exit")
             choice = input("Enter choice: ")
+            name = input("Enter your name: ")
 
             if choice == '1':
-                self.create_account()
+                self.create_account(name)
 
             elif choice == '2':
-                self.deposit_money()
+                self.deposit_money(name)
 
             elif choice == '3':
-                self.view_balance()
+                self.view_balance(name)
 
             elif choice == '4':
                 break
