@@ -5,7 +5,8 @@ class Book:
 
     def mark_as_borrowed(self):
         if self.is_available:
-            ...
+            self.is_available = False
+            print(f"You have borrowed {self.title}")
         else:
             print(f"Sorry, '{self.title}' is currently not available")
 
@@ -24,13 +25,20 @@ class Library:
         self.books.append(book)
 
     def borrow_book(self):
-        ...
+        title = input("Enter the title of the book to borrow: ")
+        for book in self.books:
+            if book.title == title:
+                book.mark_as_borrowed()
+                break
+        else:
+            print(f"No book in library with the title '{title}'")
+            
 
     def return_book(self):
         ...
 
     def view_books(self):
-        print("Available books:")
+        print("\nAvailable books:")
         for book in self.books:
             print(f"- {book.title}") if book.is_available is True else None
 
@@ -42,7 +50,7 @@ class Library:
             if choice == '1':
                 self.add_book()
             elif choice == '2':
-                ...
+                self.borrow_book()
             elif choice == '3':
                 ...
             elif choice == '4':
