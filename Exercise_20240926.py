@@ -12,8 +12,7 @@ class Book:
 
     def mark_as_returned(self):
         self.is_available = True
-        ...
-
+        print(f"You have returned {self.title}")
 
 class Library:
     def __init__(self):
@@ -35,7 +34,13 @@ class Library:
             
 
     def return_book(self):
-        ...
+        title = input("Enter the title of the book you want to return: ")
+        for book in self.books:
+            if book.title == title:
+                book.mark_as_returned()
+                break
+        else:
+            print(f"No book in library with the title '{title}'")
 
     def view_books(self):
         print("\nAvailable books:")
@@ -52,7 +57,7 @@ class Library:
             elif choice == '2':
                 self.borrow_book()
             elif choice == '3':
-                ...
+                self.return_book()
             elif choice == '4':
                 self.view_books()
             elif choice == '5':
